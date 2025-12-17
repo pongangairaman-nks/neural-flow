@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply m-0 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Prevent root scrolling and set explicit heights */
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Exclude ReactFlow from global transitions */
+.react-flow__node,
+.react-flow__edge,
+.react-flow__handle,
+.react-flow__controls,
+.react-flow__minimap,
+.react-flow__background {
+  transition: none !important;
+}
+
+/* Smooth transitions for UI components only */
+button, a, input, select, textarea {
+  transition: colors 200ms ease;
+}
+
+/* Dark mode styling for ReactFlow canvas */
+.dark .react-flow__background {
+  background-color: #1a1a1a !important;
+}
+
+.dark .react-flow__background circle {
+  fill: #555 !important;
+}
+
+.dark .react-flow__controls {
+  background-color: #1a1a1a !important;
+  border: 1px solid #374151 !important;
+}
+
+.dark .react-flow__minimap {
+  background-color: #1a1a1a !important;
+  border-color: #374151 !important;
+}
+
+.dark .react-flow__controls button {
+  background-color: #2a2a2a !important;
+  color: #ffffff !important;
+  border: 1px solid #444444 !important;
+}
+
+.dark .react-flow__controls button:hover {
+  background-color: #333333 !important;
+}
+
+/* Hide React Flow DevTools toolbar container */
+.toolbar-container {
+  display: none !important;
+}
+
+.dark .react-flow__controls button svg {
+  stroke: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* Custom handle visuals: ring when disconnected, ring + dot when connected */
+.react-flow__handle.handle-ring {
+  width: 16px !important;
+  height: 16px !important;
+  box-sizing: border-box !important;
+  border-radius: 9999px !important;
+  border: 2px solid #6366f1 !important; /* indigo-500 */
+  background: #ffffff !important;
+}
+
+.react-flow__handle.handle-ring.handle-connected {
+  background-image: radial-gradient(#6366f1 45%, transparent 46%) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+/* Center the 16px handles on the node edges (half outside, half inside) */
+.react-flow__handle.handle-ring.react-flow__handle-left {
+  left: -8px !important;
+}
+
+.react-flow__handle.handle-ring.react-flow__handle-right {
+  right: -8px !important;
+}
+
+.react-flow__handle.handle-ring.react-flow__handle-top {
+  top: -8px !important;
+}
+
+.react-flow__handle.handle-ring.react-flow__handle-bottom {
+  bottom: -8px !important;
+}
