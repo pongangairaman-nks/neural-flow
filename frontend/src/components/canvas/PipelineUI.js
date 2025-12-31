@@ -116,18 +116,19 @@ export const PipelineUI = () => {
 
     const addFirstNode = useCallback(() => {
       if (!reactFlowInstance) return;
+      const bounds = reactFlowWrapper.current.getBoundingClientRect();
+      const centerX = bounds.width / 2 - 210; 
+      const centerY = bounds.height / 2 - 180; 
+      const position = reactFlowInstance.project({ x: centerX, y: centerY });
       const nodeID = getNodeID('customInput');
       const newNode = {
         id: nodeID,
         type: 'customInput',
-        position: { x: 0, y: 0 },
+        position,
         data: getInitNodeData(nodeID, 'customInput'),
       };
       addNode(newNode);
       // Zoom out to fit the node nicely
-      setTimeout(() => {
-        reactFlowInstance.fitView({ padding: 0.3, minZoom: 0.5, maxZoom: 1 });
-      }, 0);
     }, [reactFlowInstance, getNodeID, addNode]);
 
     return (
@@ -151,7 +152,8 @@ export const PipelineUI = () => {
                 snapGrid={[gridSize, gridSize]}
                 connectionLineType='default'
                 connectionLineStyle={{ stroke: '#6366f1', strokeWidth: 2.5, strokeDasharray: '6 6' }}
-                fitView
+                fitView={false}
+                defaultViewport={{ x: 0, y: 0, zoom: 1 }}
                 className={isDarkMode ? 'dark' : ''}
             >
                 <Background color={isDarkMode ? "#555" : "#ccc"} gap={gridSize} size={2} />
